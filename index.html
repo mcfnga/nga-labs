@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Experiments · NGA Labs</title>
+<meta name="description" content="Prototypes exploring new ways to see, search and play with the collection.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@300;800&family=Newsreader:opsz,wght@6..72,300&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#FFFFFF;color:#000000;font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:300}
+a{color:#0047BB}
+.wrap{max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,56px)}
+header.site{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:28px 0;border-bottom:1px solid #D9D9D6}
+header.site img{height:24px;width:auto;display:block}
+.toggle{font:inherit;font-weight:800;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:#0047BB;background:#FFFFFF;border:2px solid #0047BB;padding:10px 16px;min-height:44px;cursor:pointer}
+.toggle:hover{background:#0047BB;color:#FFFFFF}
+.toggle:focus-visible,.exp:focus-visible{outline:3px solid #FFB600;outline-offset:4px}
+.intro{padding:clamp(40px,7vw,96px) 0 clamp(28px,4vw,56px);max-width:900px}
+.kicker{margin:0 0 16px;font-weight:800;font-size:15px;letter-spacing:3px;text-transform:uppercase;color:#0047BB}
+.rule{width:56px;height:3px;background:#0047BB;margin-bottom:24px}
+.intro h1{margin:0;font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:clamp(48px,8vw,112px);line-height:.95;letter-spacing:-1px}
+.intro p.lede{margin:24px 0 0;font-size:clamp(20px,2.2vw,28px);line-height:1.3;color:#3D3D3D;max-width:720px}
+ul.grid{list-style:none;margin:0;padding:0 0 96px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,560px),1fr));gap:clamp(20px,3vw,40px)}
+.exp{display:block;position:relative;text-decoration:none;color:inherit;border:1px solid #D9D9D6;transition:transform .25s ease,border-color .25s ease}
+a.exp[href]:hover{transform:translateY(-4px);border-color:#0047BB}
+.frame{display:block;position:relative;width:100%;aspect-ratio:16/9;overflow:hidden}
+.scale{display:block;position:absolute;left:0;top:0;width:1200px;height:675px;transform-origin:0 0;transform:scale(var(--s,.4))}
+.soon{position:absolute;right:16px;top:16px;background:#FFFFFF;color:#0047BB;border:2px solid #0047BB;font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;padding:6px 10px}
+.exp.is-soon{cursor:default}
+.cap{display:none}
+@media (max-width:640px){.cap{display:block;padding:14px 16px 16px;border-top:1px solid #D9D9D6}.cap-t{display:block;font-family:'Newsreader',Georgia,serif;font-size:24px;line-height:1.1}.cap-d{display:block;margin-top:6px;font-size:17px;line-height:1.35;color:#3D3D3D}.soon{font-size:11px;padding:4px 7px;right:10px;top:10px}}
+footer.site{border-top:1px solid #D9D9D6;padding:28px 0 48px;color:#3D3D3D;font-size:16px}
+/* card animations */
+@keyframes rock{0%,100%{transform:rotate(-2.2deg)}50%{transform:rotate(2.2deg)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes bob2{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes peanut{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(3px,-4px) rotate(20deg)}}
+.rock{animation:rock 4.8s ease-in-out infinite;transform-origin:50% 100%}
+.bobA{animation:bob 2.4s ease-in-out infinite}
+.bobB{animation:bob2 2.4s ease-in-out .35s infinite}
+.pea{animation:peanut 3.2s ease-in-out infinite}
+@keyframes up{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+@keyframes down{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+.colU{animation:up 38s linear infinite}
+.colD{animation:down 38s linear infinite}
+@keyframes wave{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.72)}}
+.tile{animation:wave 3.6s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes unspin{to{transform:rotate(-360deg)}}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+.ring{animation:spin 70s linear infinite}
+.sat{animation:unspin 70s linear infinite}
+.core{animation:breathe 5s ease-in-out infinite}
+@keyframes reveal{0%,8%{clip-path:inset(0 0 0 0)}55%,80%{clip-path:inset(0 0 0 100%)}100%{clip-path:inset(0 0 0 0)}}
+@keyframes swab{0%,8%{transform:translate(0,0) rotate(-18deg)}12%{transform:translate(10px,-30px) rotate(-14deg)}20%{transform:translate(70px,30px) rotate(-22deg)}28%{transform:translate(130px,-25px) rotate(-14deg)}36%{transform:translate(190px,28px) rotate(-22deg)}44%{transform:translate(250px,-22px) rotate(-14deg)}55%{transform:translate(310px,10px) rotate(-18deg)}80%{transform:translate(340px,180px) rotate(-30deg)}100%{transform:translate(0,0) rotate(-18deg)}}
+@keyframes tap{0%,60%,100%{transform:rotate(0)}66%{transform:rotate(-28deg)}72%{transform:rotate(4deg)}78%{transform:rotate(-20deg)}84%{transform:rotate(0)}}
+.grime{animation:reveal 9s ease-in-out infinite}
+.swab{animation:swab 9s ease-in-out infinite;transform-origin:50% 100%}
+.hammer{animation:tap 6s ease-in-out infinite;transform-origin:20% 90%}
+.still .card *,.still .card{animation:none !important}
+@media (prefers-reduced-motion: reduce){.card *,.card{animation:none !important}.exp{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="site">
+<img src="assets/nga-logo-black.svg" alt="National Gallery of Art">
+<button class="toggle" type="button" id="motion" aria-pressed="false">Pause motion</button>
+</header>
+<main>
+<section class="intro">
+<p class="kicker">NGA Labs</p>
+<div class="rule"></div>
+<h1>Experiments</h1>
+<p class="lede">Prototypes exploring new ways to see, search and play with the collection.</p>
+</section>
+<ul class="grid">
+<li class="exp-item">
+<a class="exp" data-key="handle-with-care">
+<span class="frame"><span class="scale">
+<div class="card" style="width: 1200px; height: 675px; position: relative; overflow: hidden; box-sizing: border-box; background: #FFFFFF; color: #000000; font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:300">
+<div aria-hidden="true" class="m" style="position: absolute; top: 0; right: 0; width: 640px; height: 675px; overflow: hidden">
+
+<div style="position:absolute;left:250px;top:58px;display:flex;gap:26px">
+<svg class="bobA" width="34" height="56" viewBox="0 0 34 56"><path d="M17 54V6M4 19L17 5l13 14" fill="none" stroke="#0047BB" stroke-width="4" stroke-linecap="square"/></svg>
+<svg class="bobB" width="34" height="56" viewBox="0 0 34 56"><path d="M17 54V6M4 19L17 5l13 14" fill="none" stroke="#0047BB" stroke-width="4" stroke-linecap="square"/></svg>
+</div>
+<p style="position:absolute;left:214px;top:128px;margin:0;font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:800;font-size:13px;letter-spacing:3px;color:#0047BB">THIS SIDE UP</p>
+<div class="rock" style="position:absolute;left:196px;top:176px;width:250px;height:300px">
+<div style="position:absolute;inset:0;border:14px solid #151513;box-sizing:border-box;background:#F9F8F5"></div>
+<div style="position:absolute;left:30px;top:30px;right:30px;bottom:30px;background:#D9E3F5;overflow:hidden">
+<div style="position:absolute;left:0;right:0;bottom:0;height:42%;background:#0047BB"></div>
+<div style="position:absolute;left:56px;top:40px;width:62px;height:62px;border-radius:50%;background:#FFFFFF"></div>
+<div style="position:absolute;left:0;right:0;bottom:30%;height:20%;background:#80A3DD"></div>
+</div>
+</div>
+<div style="position:absolute;left:120px;top:400px;width:400px;height:150px;border:4px solid #151513;border-top:none;box-sizing:border-box;background:#FFFFFF"></div>
+<div class="pea" style="position:absolute;left:230px;top:447px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-1.19s"></div>
+<div class="pea" style="position:absolute;left:203px;top:445px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-1.2s"></div>
+<div class="pea" style="position:absolute;left:462px;top:496px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-2.3s"></div>
+<div class="pea" style="position:absolute;left:225px;top:478px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-0.83s"></div>
+<div class="pea" style="position:absolute;left:209px;top:447px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-0.64s"></div>
+<div class="pea" style="position:absolute;left:465px;top:498px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-2.42s"></div>
+<div class="pea" style="position:absolute;left:422px;top:454px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-0.93s"></div>
+<div class="pea" style="position:absolute;left:363px;top:491px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-2.56s"></div>
+<div class="pea" style="position:absolute;left:449px;top:446px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-1.82s"></div>
+<div class="pea" style="position:absolute;left:378px;top:475px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-0.53s"></div>
+<div class="pea" style="position:absolute;left:311px;top:446px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-2.8s"></div>
+<div class="pea" style="position:absolute;left:444px;top:478px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-0.9s"></div>
+<div class="pea" style="position:absolute;left:459px;top:480px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-2.65s"></div>
+<div class="pea" style="position:absolute;left:438px;top:476px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-1.24s"></div>
+<div class="pea" style="position:absolute;left:354px;top:470px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-0.48s"></div>
+<div class="pea" style="position:absolute;left:254px;top:497px;width:22px;height:12px;border-radius:6px;background:#D9E3F5;border:1.5px solid #80A3DD;animation-delay:-0.13s"></div>
+
+<div style="position:absolute;left:120px;top:400px;width:400px;height:150px;box-sizing:border-box;border:4px solid #151513;border-top:none"></div>
+<div style="position:absolute;left:96px;top:396px;width:448px;height:8px;background:#151513"></div>
+<div style="position:absolute;left:200px;top:470px;padding:8px 16px;border:3px solid #0047BB;color:#0047BB;font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:800;font-size:22px;letter-spacing:4px;transform:rotate(-6deg);background:#FFFFFF">FRAGILE</div>
+<p style="position:absolute;left:120px;top:566px;margin:0;font-size:15px;color:#3D3D3D;letter-spacing:1px">CRATE 01 · HANDLE BY THE EDGES</p>
+
+</div>
+<div style="position: absolute; left: 72px; top: 72px; bottom: 64px; width: 470px; display: flex; flex-direction: column; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0; font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:800; font-size: 15px; letter-spacing: 3px; text-transform: uppercase; color: #0047BB">Experiment 01</p>
+<div style="width: 56px; height: 3px; background: #0047BB"></div>
+<h2 style="margin: 0; font-family:'Newsreader',Georgia,serif; font-weight: 300; font-size: 84px; line-height: 0.98; letter-spacing: -0.5px">Handle with Care</h2>
+<p style="margin: 0; font-size: 26px; line-height: 1.3; color: #3D3D3D; max-width: 430px">A game about moving priceless art very, very carefully.</p>
+</div>
+<img src="assets/nga-logo-black.svg" alt="National Gallery of Art" style="width: 205px; height: auto; display: block">
+</div>
+</div>
+</span></span>
+<span class="soon" hidden>Coming soon</span>
+<span class="cap" aria-hidden="true"><span class="cap-t">Handle with Care</span><span class="cap-d">A game about moving priceless art very, very carefully.</span></span>
+</a>
+</li>
+<li class="exp-item">
+<a class="exp" data-key="art-wall">
+<span class="frame"><span class="scale">
+<div class="card" style="width: 1200px; height: 675px; position: relative; overflow: hidden; box-sizing: border-box; background: #151513; color: #FFFFFF; font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:300">
+<div aria-hidden="true" class="m" style="position: absolute; top: 0; right: 0; width: 640px; height: 675px; overflow: hidden">
+<div style="position:absolute;left:40px;top:-40px;display:flex;gap:14px;transform:rotate(0deg)">
+<div class="colU" style="display:flex;flex-direction:column;gap:14px;width:136px;flex:none">
+<div style="height:210px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:210px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#A88B5E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#A88B5E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:210px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:210px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#A88B5E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#A88B5E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+</div>
+<div class="colD" style="display:flex;flex-direction:column;gap:14px;width:136px;flex:none">
+<div style="height:180px;background:#A88B5E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:210px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#0047BB;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#A88B5E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:210px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#0047BB;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+</div>
+<div class="colU" style="display:flex;flex-direction:column;gap:14px;width:136px;flex:none">
+<div style="height:120px;background:#2B3A55;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#3D3D3D;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#3D3D3D;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#3D3D3D;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#2B3A55;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#3D3D3D;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#3D3D3D;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#3D3D3D;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+</div>
+<div class="colD" style="display:flex;flex-direction:column;gap:14px;width:136px;flex:none">
+<div style="height:180px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#0047BB;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#5A6B4E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#6B5B45;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#C9B89A;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#0047BB;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#5A6B4E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#6B5B45;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#C9B89A;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+</div>
+</div>
+<div style="position:absolute;inset:0;background:linear-gradient(90deg,#151513 0%,rgba(21,21,19,0) 22%)"></div>
+
+</div>
+<div style="position: absolute; left: 72px; top: 72px; bottom: 64px; width: 470px; display: flex; flex-direction: column; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0; font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:800; font-size: 15px; letter-spacing: 3px; text-transform: uppercase; color: #FFB600">Experiment 02</p>
+<div style="width: 56px; height: 3px; background: #FFB600"></div>
+<h2 style="margin: 0; font-family:'Newsreader',Georgia,serif; font-weight: 300; font-size: 84px; line-height: 0.98; letter-spacing: -0.5px">Art Wall</h2>
+<p style="margin: 0; font-size: 26px; line-height: 1.3; color: #C8C9C7; max-width: 430px">Endless columns of paintings from the collection. Touch one to find works that look like it.</p>
+</div>
+<img src="assets/nga-logo-white.svg" alt="National Gallery of Art" style="width: 205px; height: auto; display: block">
+</div>
+</div>
+</span></span>
+<span class="soon" hidden>Coming soon</span>
+<span class="cap" aria-hidden="true"><span class="cap-t">Art Wall</span><span class="cap-d">Endless columns of paintings from the collection. Touch one to find works that look like it.</span></span>
+</a>
+</li>
+<li class="exp-item">
+<a class="exp" data-key="mosaic">
+<span class="frame"><span class="scale">
+<div class="card" style="width: 1200px; height: 675px; position: relative; overflow: hidden; box-sizing: border-box; background: #F9F8F5; color: #000000; font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:300">
+<div aria-hidden="true" class="m" style="position: absolute; top: 0; right: 0; width: 640px; height: 675px; overflow: hidden">
+<div style="position:absolute;left:59px;top:76px;display:grid;grid-template-columns:repeat(15,32px);gap:3px">
+<div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:2.18s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:2.03s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.89s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.77s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.68s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.6s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.56s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.54s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.56s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.6s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.68s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.77s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.89s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:2.03s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:2.18s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:2.03s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.87s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.72s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.59s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.48s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.39s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.34s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.32s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.34s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.39s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.48s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.59s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.72s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.87s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:2.03s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.89s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.72s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.56s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.41s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.28s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.18s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:1.12s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:1.1s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:1.12s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.18s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.28s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.41s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.56s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.72s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.89s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.77s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.59s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.41s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.24s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:1.1s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:0.98s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:0.91s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:0.88s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:0.91s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:0.98s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:1.1s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.24s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.41s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.59s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.77s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.68s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.48s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.28s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:1.1s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:0.93s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:0.79s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.7s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.66s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#F9F8F5;animation-delay:0.7s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:0.79s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:0.93s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:1.1s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.28s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.48s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.68s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.6s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.39s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.18s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:0.98s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:0.79s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.62s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.49s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#F9F8F5;animation-delay:0.44s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.49s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.62s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:0.79s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:0.98s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.18s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.39s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.6s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.56s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.34s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:1.12s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:0.91s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.7s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.49s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#F9F8F5;animation-delay:0.31s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.22s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.31s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#F9F8F5;animation-delay:0.49s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.7s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:0.91s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:1.12s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.34s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.56s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.54s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.32s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:1.1s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:0.88s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.66s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#F9F8F5;animation-delay:0.44s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.22s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.0s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#F9F8F5;animation-delay:0.22s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.44s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.66s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:0.88s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:1.1s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.32s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.54s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.56s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.34s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:1.12s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:0.91s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#F9F8F5;animation-delay:0.7s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.49s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.31s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#F9F8F5;animation-delay:0.22s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.31s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.49s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#F9F8F5;animation-delay:0.7s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:0.91s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:1.12s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.34s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.56s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.6s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.39s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.18s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:0.98s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:0.79s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.62s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#F9F8F5;animation-delay:0.49s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.44s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.49s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#F9F8F5;animation-delay:0.62s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#D9E3F5;animation-delay:0.79s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#80A3DD;animation-delay:0.98s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#0047BB;animation-delay:1.18s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.39s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#1F5CC4;animation-delay:1.6s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.68s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.48s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.28s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.1s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:0.93s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:0.79s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.7s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#FFFFFF;animation-delay:0.66s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#F9F8F5;animation-delay:0.7s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:0.79s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:0.93s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.1s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.28s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.48s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.68s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.77s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.59s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.41s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.24s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.1s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:0.98s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:0.91s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:0.88s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:0.91s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:0.98s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.1s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.24s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.41s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.59s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.77s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.89s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.72s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.56s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.41s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.28s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.18s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.12s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.1s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.12s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.18s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.28s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.41s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.56s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.72s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.89s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:2.03s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.87s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.72s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.59s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.48s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.39s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.34s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.32s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.34s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.39s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.48s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.59s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.72s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.87s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:2.03s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:2.18s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:2.03s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.89s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.77s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.68s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.6s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.56s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.54s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.56s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.6s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:1.68s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:1.77s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#151513;animation-delay:1.89s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#3D3D3D;animation-delay:2.03s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div><div class="tile" style="width:32px;height:32px;background:#2B3A55;animation-delay:2.18s;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)"></div>
+</div>
+</div>
+<div style="position: absolute; left: 72px; top: 72px; bottom: 64px; width: 470px; display: flex; flex-direction: column; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0; font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:800; font-size: 15px; letter-spacing: 3px; text-transform: uppercase; color: #0047BB">Experiment 03</p>
+<div style="width: 56px; height: 3px; background: #0047BB"></div>
+<h2 style="margin: 0; font-family:'Newsreader',Georgia,serif; font-weight: 300; font-size: 84px; line-height: 0.98; letter-spacing: -0.5px">Mosaic</h2>
+<p style="margin: 0; font-size: 26px; line-height: 1.3; color: #3D3D3D; max-width: 430px">Upload a photo and rebuild it from thousands of open-access artworks.</p>
+</div>
+<img src="assets/nga-logo-black.svg" alt="National Gallery of Art" style="width: 205px; height: auto; display: block">
+</div>
+</div>
+</span></span>
+<span class="soon" hidden>Coming soon</span>
+<span class="cap" aria-hidden="true"><span class="cap-t">Mosaic</span><span class="cap-d">Upload a photo and rebuild it from thousands of open-access artworks.</span></span>
+</a>
+</li>
+<li class="exp-item">
+<a class="exp" data-key="visual-browsing">
+<span class="frame"><span class="scale">
+<div class="card" style="width: 1200px; height: 675px; position: relative; overflow: hidden; box-sizing: border-box; background: #0047BB; color: #FFFFFF; font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:300">
+<div aria-hidden="true" class="m" style="position: absolute; top: 0; right: 0; width: 640px; height: 675px; overflow: hidden">
+<div class="ring" style="position:absolute;left:102px;top:109px;width:456px;height:456px">
+<div style="position:absolute;inset:0;border-radius:50%;border:1px dashed rgba(255,255,255,.4)"></div>
+<div style="position:absolute;left:228px;top:228px;width:178px;height:1px;background:rgba(255,255,255,.28);transform-origin:0 0;transform:rotate(-90deg)"></div>
+<div style="position:absolute;left:228px;top:228px;width:178px;height:1px;background:rgba(255,255,255,.28);transform-origin:0 0;transform:rotate(-60deg)"></div>
+<div style="position:absolute;left:228px;top:228px;width:178px;height:1px;background:rgba(255,255,255,.28);transform-origin:0 0;transform:rotate(-30deg)"></div>
+<div style="position:absolute;left:228px;top:228px;width:178px;height:1px;background:rgba(255,255,255,.28);transform-origin:0 0;transform:rotate(0deg)"></div>
+<div style="position:absolute;left:228px;top:228px;width:178px;height:1px;background:rgba(255,255,255,.28);transform-origin:0 0;transform:rotate(30deg)"></div>
+<div style="position:absolute;left:228px;top:228px;width:178px;height:1px;background:rgba(255,255,255,.28);transform-origin:0 0;transform:rotate(60deg)"></div>
+<div style="position:absolute;left:228px;top:228px;width:178px;height:1px;background:rgba(255,255,255,.28);transform-origin:0 0;transform:rotate(90deg)"></div>
+<div style="position:absolute;left:228px;top:228px;width:178px;height:1px;background:rgba(255,255,255,.28);transform-origin:0 0;transform:rotate(120deg)"></div>
+<div style="position:absolute;left:228px;top:228px;width:178px;height:1px;background:rgba(255,255,255,.28);transform-origin:0 0;transform:rotate(150deg)"></div>
+<div style="position:absolute;left:228px;top:228px;width:178px;height:1px;background:rgba(255,255,255,.28);transform-origin:0 0;transform:rotate(180deg)"></div>
+<div style="position:absolute;left:228px;top:228px;width:178px;height:1px;background:rgba(255,255,255,.28);transform-origin:0 0;transform:rotate(210deg)"></div>
+<div style="position:absolute;left:228px;top:228px;width:178px;height:1px;background:rgba(255,255,255,.28);transform-origin:0 0;transform:rotate(240deg)"></div>
+<div style="position:absolute;left:189px;top:-32px;width:78px;height:64px"><div class="sat" style="width:100%;height:100%;background:#FFFFFF;box-shadow:0 0 0 4px #0047BB,0 0 0 5px rgba(255,255,255,.35)"></div></div>
+<div style="position:absolute;left:310px;top:-11px;width:64px;height:84px"><div class="sat" style="width:100%;height:100%;background:#D9E3F5;box-shadow:0 0 0 4px #0047BB,0 0 0 5px rgba(255,255,255,.35)"></div></div>
+<div style="position:absolute;left:386px;top:82px;width:78px;height:64px"><div class="sat" style="width:100%;height:100%;background:#80A3DD;box-shadow:0 0 0 4px #0047BB,0 0 0 5px rgba(255,255,255,.35)"></div></div>
+<div style="position:absolute;left:424px;top:186px;width:64px;height:84px"><div class="sat" style="width:100%;height:100%;background:#151513;box-shadow:0 0 0 4px #0047BB,0 0 0 5px rgba(255,255,255,.35)"></div></div>
+<div style="position:absolute;left:386px;top:310px;width:78px;height:64px"><div class="sat" style="width:100%;height:100%;background:#FFB600;box-shadow:0 0 0 4px #0047BB,0 0 0 5px rgba(255,255,255,.35)"></div></div>
+<div style="position:absolute;left:310px;top:383px;width:64px;height:84px"><div class="sat" style="width:100%;height:100%;background:#D9E3F5;box-shadow:0 0 0 4px #0047BB,0 0 0 5px rgba(255,255,255,.35)"></div></div>
+<div style="position:absolute;left:189px;top:424px;width:78px;height:64px"><div class="sat" style="width:100%;height:100%;background:#FFFFFF;box-shadow:0 0 0 4px #0047BB,0 0 0 5px rgba(255,255,255,.35)"></div></div>
+<div style="position:absolute;left:82px;top:383px;width:64px;height:84px"><div class="sat" style="width:100%;height:100%;background:#80A3DD;box-shadow:0 0 0 4px #0047BB,0 0 0 5px rgba(255,255,255,.35)"></div></div>
+<div style="position:absolute;left:-8px;top:310px;width:78px;height:64px"><div class="sat" style="width:100%;height:100%;background:#2B3A55;box-shadow:0 0 0 4px #0047BB,0 0 0 5px rgba(255,255,255,.35)"></div></div>
+<div style="position:absolute;left:-32px;top:186px;width:64px;height:84px"><div class="sat" style="width:100%;height:100%;background:#D9E3F5;box-shadow:0 0 0 4px #0047BB,0 0 0 5px rgba(255,255,255,.35)"></div></div>
+<div style="position:absolute;left:-8px;top:82px;width:78px;height:64px"><div class="sat" style="width:100%;height:100%;background:#FFFFFF;box-shadow:0 0 0 4px #0047BB,0 0 0 5px rgba(255,255,255,.35)"></div></div>
+<div style="position:absolute;left:82px;top:-11px;width:64px;height:84px"><div class="sat" style="width:100%;height:100%;background:#80A3DD;box-shadow:0 0 0 4px #0047BB,0 0 0 5px rgba(255,255,255,.35)"></div></div>
+</div>
+<div class="core" style="position:absolute;left:250px;top:237px;width:160px;height:200px;background:#FFFFFF;box-shadow:0 0 0 10px rgba(255,255,255,.15)">
+<div style="position:absolute;left:18px;right:18px;top:18px;bottom:18px;background:#D9E3F5;overflow:hidden">
+<div style="position: absolute; left: 36px; top: 57px; width: 52px; height: 52px; border-radius: 50%; background: #FFB600"></div><div style="position:absolute;left:0;right:0;bottom:0;height:40%;background:#80A3DD"></div>
+</div></div>
+</div>
+<div style="position: absolute; left: 72px; top: 72px; bottom: 64px; width: 470px; display: flex; flex-direction: column; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0; font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:800; font-size: 15px; letter-spacing: 3px; text-transform: uppercase; color: #FFFFFF">Experiment 04</p>
+<div style="width: 56px; height: 3px; background: #FFFFFF"></div>
+<h2 style="margin: 0; font-family:'Newsreader',Georgia,serif; font-weight: 300; font-size: 84px; line-height: 0.98; letter-spacing: -0.5px">The Weather in You</h2>
+<p style="margin: 0; font-size: 26px; line-height: 1.3; color: #E6ECF8; max-width: 430px">Explore the collection by how artworks look and feel: color, composition, mood.</p>
+</div>
+<img src="assets/nga-logo-white.svg" alt="National Gallery of Art" style="width: 205px; height: auto; display: block">
+</div>
+</div>
+</span></span>
+<span class="soon" hidden>Coming soon</span>
+<span class="cap" aria-hidden="true"><span class="cap-t">The Weather in You</span><span class="cap-d">Explore the collection by how artworks look and feel: color, composition, mood.</span></span>
+</a>
+</li>
+<li class="exp-item">
+<a class="exp" data-key="conservation-simulator">
+<span class="frame"><span class="scale">
+<div class="card" style="width: 1200px; height: 675px; position: relative; overflow: hidden; box-sizing: border-box; background: #FFFFFF; color: #000000; font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:300">
+<div aria-hidden="true" class="m" style="position: absolute; top: 0; right: 0; width: 640px; height: 675px; overflow: hidden">
+<div style="position:absolute;left:90px;top:120px;width:420px;height:320px;border:16px solid #151513;box-sizing:content-box;background:#151513">
+<div style="position:absolute;inset:0;overflow:hidden"><div style="position:absolute;inset:0;background:#D9E3F5"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:38%;background:#0047BB"></div>
+<div style="position:absolute;right:70px;top:46px;width:70px;height:70px;border-radius:50%;background:#FFFFFF"></div>
+<div style="position:absolute;left:0;right:0;bottom:38%;height:14%;background:#80A3DD"></div></div>
+<div class="grime" style="position:absolute;inset:0;background:#151513;opacity:.78">
+<div style="position:absolute;left:40px;top:60px;width:90px;height:40px;border-radius:50%;background:#000000"></div>
+<div style="position:absolute;right:60px;bottom:80px;width:130px;height:50px;border-radius:50%;background:#000000"></div>
+<div style="position:absolute;left:180px;top:150px;width:60px;height:26px;border-radius:50%;background:#000000"></div>
+</div>
+</div>
+<div class="swab" style="position:absolute;left:110px;top:200px;width:20px;height:190px">
+<div style="position:absolute;left:0;top:0;width:20px;height:32px;border-radius:10px;background:#FFFFFF;box-shadow:0 0 0 3px #151513"></div>
+<div style="position:absolute;left:8px;top:32px;width:4px;height:158px;background:#151513"></div>
+</div>
+<div style="position:absolute;left:430px;top:500px;width:180px;height:120px">
+<div class="hammer" style="position:absolute;left:40px;top:-24px;width:126px;height:142px;transform-origin:72% 88%">
+<svg aria-hidden="true" width="126" height="142" viewBox="-20 -16 150 170" style="display:block;overflow:visible"><g transform="rotate(-30 64 70)"><rect x="59" y="24" width="10" height="50" fill="#FFFFFF" stroke="#151513" stroke-width="3"></rect><rect x="56" y="70" width="16" height="64" rx="5" fill="#0047BB" stroke="#151513" stroke-width="3"></rect><path d="M80 8H52Q18 8 2 56Q24 30 52 26H80Z" fill="#151513"></path><rect x="78" y="3" width="20" height="28" rx="2" fill="#151513"></rect></g></svg>
+</div>
+<div style="position:absolute;left:-150px;top:90px;padding:5px 12px;border:3px solid #0047BB;background:#FFFFFF;color:#0047BB;font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:800;font-size:15px;letter-spacing:3px;transform:rotate(-6deg)">JUST… NO</div>
+</div>
+</div>
+<div style="position: absolute; left: 72px; top: 72px; bottom: 64px; width: 470px; display: flex; flex-direction: column; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0; font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:800; font-size: 15px; letter-spacing: 3px; text-transform: uppercase; color: #0047BB">Experiment 05</p>
+<div style="width: 56px; height: 3px; background: #0047BB"></div>
+<h2 style="margin: 0; font-family:'Newsreader',Georgia,serif; font-weight: 300; font-size: 84px; line-height: 0.98; letter-spacing: -0.5px">Conservation Simulator</h2>
+<p style="margin: 0; font-size: 26px; line-height: 1.3; color: #3D3D3D; max-width: 430px">Patch &amp; Pray: restore the painting. Please ignore the tiny hammer.</p>
+</div>
+<img src="assets/nga-logo-black.svg" alt="National Gallery of Art" style="width: 205px; height: auto; display: block">
+</div>
+</div>
+</span></span>
+<span class="soon" hidden>Coming soon</span>
+<span class="cap" aria-hidden="true"><span class="cap-t">Conservation Simulator</span><span class="cap-d">Patch &amp; Pray: restore the painting. Please ignore the tiny hammer.</span></span>
+</a>
+</li>
+</ul>
+</main>
+<footer class="site">Experimental prototypes. Things may change or break.</footer>
+</div>
+<script src="links.js"></script>
+<script>
+(function () {
+  var links = window.EXPERIMENT_LINKS || {};
+  document.querySelectorAll('.exp').forEach(function (a) {
+    var url = (links[a.dataset.key] || '').trim();
+    var title = a.querySelector('h2').textContent;
+    if (url) { a.href = url; a.setAttribute('aria-label', 'Open ' + title); }
+    else { a.classList.add('is-soon'); a.querySelector('.soon').hidden = false; a.setAttribute('aria-label', title + ', coming soon'); }
+  });
+  function fit() {
+    document.querySelectorAll('.frame').forEach(function (f) {
+      f.style.setProperty('--s', f.clientWidth / 1200);
+    });
+  }
+  fit();
+  if ('ResizeObserver' in window) { var ro = new ResizeObserver(fit); document.querySelectorAll('.frame').forEach(function (f) { ro.observe(f); }); }
+  else window.addEventListener('resize', fit);
+  var btn = document.getElementById('motion');
+  var still = false;
+  try { still = localStorage.getItem('nga-labs-still') === '1'; } catch (e) {}
+  function apply() {
+    document.body.classList.toggle('still', still);
+    btn.setAttribute('aria-pressed', still ? 'true' : 'false');
+    btn.textContent = still ? 'Play motion' : 'Pause motion';
+  }
+  btn.addEventListener('click', function () { still = !still; try { localStorage.setItem('nga-labs-still', still ? '1' : '0'); } catch (e) {} apply(); });
+  apply();
+})();
+</script>
+</body>
+</html>
