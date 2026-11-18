@@ -5,5 +5,6 @@ window.EXPERIMENT_LINKS = {
   "art-wall": "https://artwalldemonga.netlify.app/",
   "mosaic": "https://mosiacnga.netlify.app/",
   "visual-browsing": "https://nga-visual-browsing.netlify.app/",
-  "conservation-simulator": "https://artrescue.netlify.app/"
+  "conservation-simulator": "https://artrescue.netlify.app/",
+  "borrowed-light": "https://nga-borrowed-light.netlify.app/"
 };

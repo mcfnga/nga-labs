@@ -61,6 +61,18 @@ footer.site{border-top:1px solid #D9D9D6;padding:28px 0 48px;color:#3D3D3D;font-
 .grime{animation:reveal 9s ease-in-out infinite}
 .swab{animation:swab 9s ease-in-out infinite;transform-origin:50% 100%}
 .hammer{animation:tap 6s ease-in-out infinite;transform-origin:20% 90%}
+@keyframes bl-wallc{0%,25%{background:#D9E3F5}33%,58%{background:#0047BB}66%,91%{background:#151513}100%{background:#D9E3F5}}
+@keyframes bl-sofac{0%,25%{background:#0047BB}33%,58%{background:#D9E3F5}66%,91%{background:#80A3DD}100%{background:#0047BB}}
+@keyframes bl-cushc{0%,25%{background:#FFFFFF}33%,58%{background:#151513}66%,91%{background:#FFFFFF}100%{background:#FFFFFF}}
+@keyframes bl-chipc{0%,32%{background:#0047BB}34%,65%{background:#151513}67%,99%{background:#D9E3F5}100%{background:#0047BB}}
+@keyframes bl-fly{0%{transform:translate(0,0) scale(1);opacity:0}12%{opacity:1}68%{transform:translate(196px,150px) scale(1);opacity:1}100%{transform:translate(214px,166px) scale(.5);opacity:0}}
+@keyframes bl-hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.bl-wall{animation:bl-wallc 12s ease-in-out infinite}
+.bl-sofa{animation:bl-sofac 12s ease-in-out infinite}
+.bl-cush{animation:bl-cushc 12s ease-in-out infinite}
+.bl-fly{animation:bl-fly 4s ease-in-out infinite}
+.bl-chip{animation:bl-chipc 12s linear infinite}
+.bl-hop{animation:bl-hop 2.4s ease-in-out infinite}
 .still .card *,.still .card{animation:none !important}
 @media (prefers-reduced-motion: reduce){.card *,.card{animation:none !important}.exp{transition:none}}
 </style>
@@ -340,6 +352,53 @@ footer.site{border-top:1px solid #D9D9D6;padding:28px 0 48px;color:#3D3D3D;font-
 </span></span>
 <span class="soon" hidden>Coming soon</span>
 <span class="cap" aria-hidden="true"><span class="cap-t">Conservation Simulator</span><span class="cap-d">Patch &amp; Pray: restore the painting. Please ignore the tiny hammer.</span></span>
+</a>
+</li>
+<li class="exp-item">
+<a class="exp" data-key="borrowed-light">
+<span class="frame"><span class="scale">
+<div class="card" style="width: 1200px; height: 675px; position: relative; overflow: hidden; box-sizing: border-box; background: #F9F8F5; color: #000000; font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:300">
+<div aria-hidden="true" class="m" style="position: absolute; top: 0; right: 0; width: 640px; height: 675px; overflow: hidden">
+<div style="position:absolute;left:56px;top:84px;width:170px;height:210px;border:14px solid #151513;box-sizing:content-box;background:#D9E3F5;overflow:hidden">
+<div style="position:absolute;right:28px;top:30px;width:52px;height:52px;border-radius:50%;background:#FFFFFF"></div>
+<div style="position:absolute;left:0;right:0;bottom:36%;height:14%;background:#80A3DD"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:36%;background:#0047BB"></div>
+</div>
+<div style="position:absolute;left:56px;top:356px;display:flex;gap:10px">
+<div class="bl-hop" style="width:30px;height:30px;background:#D9E3F5;box-shadow:0 0 0 3px #151513"></div>
+<div class="bl-hop" style="width:30px;height:30px;background:#80A3DD;box-shadow:0 0 0 3px #151513;animation-delay:.2s"></div>
+<div class="bl-hop" style="width:30px;height:30px;background:#0047BB;box-shadow:0 0 0 3px #151513;animation-delay:.4s"></div>
+<div class="bl-hop" style="width:30px;height:30px;background:#FFFFFF;box-shadow:0 0 0 3px #151513;animation-delay:.6s"></div>
+<div class="bl-hop" style="width:30px;height:30px;background:#151513;box-shadow:0 0 0 3px #151513;animation-delay:.8s"></div>
+</div>
+<div style="position:absolute;left:276px;top:250px;width:300px;height:340px;border:6px solid #151513;box-sizing:content-box;overflow:hidden">
+<div class="bl-wall" style="position:absolute;inset:0;background:#D9E3F5"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:74px;background:#FFFFFF;border-top:6px solid #151513"></div>
+<div style="position:absolute;left:170px;top:48px;width:64px;height:78px;background:#FFFFFF;border:6px solid #151513;box-sizing:border-box">
+<div style="position:absolute;left:14px;top:14px;width:22px;height:22px;border-radius:50%;background:#0047BB"></div>
+</div>
+<div class="bl-sofa" style="position:absolute;left:40px;bottom:44px;width:220px;height:92px;background:#0047BB;box-shadow:0 0 0 5px #151513"></div>
+<div class="bl-sofa" style="position:absolute;left:22px;bottom:44px;width:30px;height:64px;background:#0047BB;box-shadow:0 0 0 5px #151513"></div>
+<div class="bl-sofa" style="position:absolute;left:248px;bottom:44px;width:30px;height:64px;background:#0047BB;box-shadow:0 0 0 5px #151513"></div>
+<div class="bl-cush" style="position:absolute;left:70px;bottom:76px;width:54px;height:46px;background:#FFFFFF;box-shadow:0 0 0 4px #151513"></div>
+</div>
+<div class="bl-fly" style="position:absolute;left:250px;top:180px;width:34px;height:34px">
+<div class="bl-chip" style="width:34px;height:34px;background:#0047BB;box-shadow:0 0 0 3px #151513"></div>
+</div>
+</div>
+<div style="position: absolute; left: 72px; top: 72px; bottom: 64px; width: 470px; display: flex; flex-direction: column; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0; font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:800; font-size: 15px; letter-spacing: 3px; text-transform: uppercase; color: #0047BB">Experiment 06</p>
+<div style="width: 56px; height: 3px; background: #0047BB"></div>
+<h2 style="margin: 0; font-family:'Newsreader',Georgia,serif; font-weight: 300; font-size: 84px; line-height: 0.98; letter-spacing: -0.5px">Borrowed Light</h2>
+<p style="margin: 0; font-size: 26px; line-height: 1.3; color: #3D3D3D; max-width: 430px">Borrow a painting's colors, composition and subject to decorate a room.</p>
+</div>
+<img src="assets/nga-logo-black.svg" alt="National Gallery of Art" style="width: 205px; height: auto; display: block">
+</div>
+</div>
+</span></span>
+<span class="soon" hidden>Coming soon</span>
+<span class="cap" aria-hidden="true"><span class="cap-t">Borrowed Light</span><span class="cap-d">Borrow a painting's colors, composition and subject to decorate a room.</span></span>
 </a>
 </li>
 </ul>
