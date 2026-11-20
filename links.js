@@ -7,5 +7,5 @@ window.EXPERIMENT_LINKS = {
   "visual-browsing": "https://nga-visual-browsing.netlify.app/",
   "conservation-simulator": "https://artrescue.netlify.app/",
   "borrowed-light": "https://nga-borrowed-light.netlify.app/",
-  "wallpaper-studio": ""
+  "wallpaper-studio": "https://wallpaper-pattern-studio.vercel.app/"
 };
