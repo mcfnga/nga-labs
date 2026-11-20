@@ -6,5 +6,6 @@ window.EXPERIMENT_LINKS = {
   "mosaic": "https://mosiacnga.netlify.app/",
   "visual-browsing": "https://nga-visual-browsing.netlify.app/",
   "conservation-simulator": "https://artrescue.netlify.app/",
-  "borrowed-light": "https://nga-borrowed-light.netlify.app/"
+  "borrowed-light": "https://nga-borrowed-light.netlify.app/",
+  "wallpaper-studio": ""
 };

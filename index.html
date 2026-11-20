@@ -67,12 +67,23 @@ footer.site{border-top:1px solid #D9D9D6;padding:28px 0 48px;color:#3D3D3D;font-
 @keyframes bl-chipc{0%,32%{background:#0047BB}34%,65%{background:#151513}67%,99%{background:#D9E3F5}100%{background:#0047BB}}
 @keyframes bl-fly{0%{transform:translate(0,0) scale(1);opacity:0}12%{opacity:1}68%{transform:translate(196px,150px) scale(1);opacity:1}100%{transform:translate(214px,166px) scale(.5);opacity:0}}
 @keyframes bl-hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes ws-cropk{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:.55}}
+@keyframes ws-flyk{0%{transform:translate(0,0) scale(1);opacity:0}12%{opacity:1}68%{transform:translate(236px,170px) scale(1);opacity:1}100%{transform:translate(256px,186px) scale(.5);opacity:0}}
+@keyframes ws-pan{from{background-position:0 0}to{background-position:0 160px}}
+@keyframes ws-pan2{from{background-position:40px 40px}to{background-position:40px 200px}}
+@keyframes ws-ground{0%,25%{background-color:#D9E3F5}33%,58%{background-color:#FFFFFF}66%,91%{background-color:#F9F8F5}100%{background-color:#D9E3F5}}
+@keyframes ws-hopk{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 .bl-wall{animation:bl-wallc 12s ease-in-out infinite}
 .bl-sofa{animation:bl-sofac 12s ease-in-out infinite}
 .bl-cush{animation:bl-cushc 12s ease-in-out infinite}
 .bl-fly{animation:bl-fly 4s ease-in-out infinite}
 .bl-chip{animation:bl-chipc 12s linear infinite}
 .bl-hop{animation:bl-hop 2.4s ease-in-out infinite}
+.ws-crop{animation:ws-cropk 3s ease-in-out infinite}
+.ws-fly{animation:ws-flyk 4s ease-in-out infinite}
+.ws-wall{animation:ws-pan 14s linear infinite,ws-ground 12s ease-in-out infinite}
+.ws-wall2{animation:ws-pan2 14s linear infinite}
+.ws-hop{animation:ws-hopk 2.4s ease-in-out infinite}
 .still .card *,.still .card{animation:none !important}
 @media (prefers-reduced-motion: reduce){.card *,.card{animation:none !important}.exp{transition:none}}
 </style>
@@ -399,6 +410,63 @@ footer.site{border-top:1px solid #D9D9D6;padding:28px 0 48px;color:#3D3D3D;font-
 </span></span>
 <span class="soon" hidden>Coming soon</span>
 <span class="cap" aria-hidden="true"><span class="cap-t">Borrowed Light</span><span class="cap-d">Borrow a painting's colors, composition and subject to decorate a room.</span></span>
+</a>
+</li>
+<li class="exp-item">
+<a class="exp" data-key="wallpaper-studio">
+<span class="frame"><span class="scale">
+<div class="card" style="width: 1200px; height: 675px; position: relative; overflow: hidden; box-sizing: border-box; background: #FFFFFF; color: #000000; font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:300">
+<div aria-hidden="true" class="m" style="position: absolute; top: 0; right: 0; width: 640px; height: 675px; overflow: hidden">
+<div style="position:absolute;left:56px;top:84px;width:170px;height:210px;border:14px solid #151513;box-sizing:content-box;background:#F9F8F5;overflow:hidden">
+<div style="position:absolute;left:47px;top:67px;width:76px;height:76px">
+<div style="position:absolute;left:24px;top:0;width:28px;height:28px;border-radius:50%;background:#0047BB"></div>
+<div style="position:absolute;left:24px;bottom:0;width:28px;height:28px;border-radius:50%;background:#0047BB"></div>
+<div style="position:absolute;left:0;top:24px;width:28px;height:28px;border-radius:50%;background:#0047BB"></div>
+<div style="position:absolute;right:0;top:24px;width:28px;height:28px;border-radius:50%;background:#0047BB"></div>
+<div style="position:absolute;left:28px;top:28px;width:20px;height:20px;border-radius:50%;background:#151513"></div>
+</div>
+<div class="ws-crop" style="position:absolute;left:35px;top:55px;width:94px;height:94px;border:3px dashed #151513"></div>
+</div>
+<div style="position:absolute;left:56px;top:356px;display:flex;gap:10px">
+<div class="ws-hop" style="width:30px;height:30px;background:#D9E3F5;box-shadow:0 0 0 3px #151513;background-image:radial-gradient(circle,#0047BB 5px,transparent 6px);background-size:15px 15px"></div>
+<div class="ws-hop" style="width:30px;height:30px;background:#D9E3F5;box-shadow:0 0 0 3px #151513;background-image:radial-gradient(circle,#0047BB 5px,transparent 6px),radial-gradient(circle,#0047BB 5px,transparent 6px);background-size:15px 15px;background-position:0 0,7.5px 7.5px;animation-delay:.2s"></div>
+<div class="ws-hop" style="width:30px;height:30px;background:#FFFFFF;box-shadow:0 0 0 3px #151513;background-image:linear-gradient(45deg,#0047BB 25%,transparent 25%,transparent 75%,#0047BB 75%),linear-gradient(45deg,#0047BB 25%,transparent 25%,transparent 75%,#0047BB 75%);background-size:15px 15px;background-position:0 0,7.5px 7.5px;animation-delay:.4s"></div>
+<div class="ws-hop" style="width:30px;height:30px;background:#80A3DD;box-shadow:0 0 0 3px #151513;background-image:radial-gradient(circle,#FFFFFF 4px,transparent 5px);background-size:10px 10px;animation-delay:.6s"></div>
+<div class="ws-hop" style="width:30px;height:30px;background:#151513;box-shadow:0 0 0 3px #151513;background-image:radial-gradient(circle,#D9E3F5 5px,transparent 6px);background-size:15px 15px;animation-delay:.8s"></div>
+</div>
+<div style="position:absolute;left:276px;top:250px;width:300px;height:340px;border:6px solid #151513;box-sizing:content-box;overflow:hidden">
+<div class="ws-wall" style="position:absolute;inset:0;background-color:#D9E3F5;background-image:radial-gradient(circle at 50% 33%,#0047BB 10px,transparent 11px),radial-gradient(circle at 50% 67%,#0047BB 10px,transparent 11px),radial-gradient(circle at 33% 50%,#0047BB 10px,transparent 11px),radial-gradient(circle at 67% 50%,#0047BB 10px,transparent 11px),radial-gradient(circle at 50% 50%,#151513 5px,transparent 6px);background-size:80px 80px"></div>
+<div class="ws-wall2" style="position:absolute;inset:0;background-image:radial-gradient(circle at 50% 33%,#0047BB 10px,transparent 11px),radial-gradient(circle at 50% 67%,#0047BB 10px,transparent 11px),radial-gradient(circle at 33% 50%,#0047BB 10px,transparent 11px),radial-gradient(circle at 67% 50%,#0047BB 10px,transparent 11px),radial-gradient(circle at 50% 50%,#151513 5px,transparent 6px);background-size:80px 80px;background-position:40px 40px"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:96px;background:#FFFFFF;border-top:6px solid #151513"></div>
+<div style="position:absolute;left:20px;right:20px;bottom:18px;height:56px;border:4px solid #151513;box-sizing:border-box"></div>
+<div style="position:absolute;left:196px;bottom:96px;width:52px;height:92px">
+<div style="position:absolute;left:-4px;top:-4px;width:60px;height:42px;background:#151513;clip-path:polygon(18% 0,82% 0,100% 100%,0 100%)"></div>
+<div style="position:absolute;left:0;top:0;width:52px;height:34px;background:#FFFFFF;clip-path:polygon(18% 0,82% 0,100% 100%,0 100%)"></div>
+<div style="position:absolute;left:23px;top:34px;width:6px;height:46px;background:#151513"></div>
+<div style="position:absolute;left:10px;bottom:0;width:32px;height:12px;background:#151513"></div>
+</div>
+</div>
+<div class="ws-fly" style="position:absolute;left:150px;top:160px;width:40px;height:40px;background:#F9F8F5;box-shadow:0 0 0 3px #151513">
+<div style="position:absolute;left:14px;top:4px;width:12px;height:12px;border-radius:50%;background:#0047BB"></div>
+<div style="position:absolute;left:14px;bottom:4px;width:12px;height:12px;border-radius:50%;background:#0047BB"></div>
+<div style="position:absolute;left:4px;top:14px;width:12px;height:12px;border-radius:50%;background:#0047BB"></div>
+<div style="position:absolute;right:4px;top:14px;width:12px;height:12px;border-radius:50%;background:#0047BB"></div>
+<div style="position:absolute;left:16px;top:16px;width:8px;height:8px;border-radius:50%;background:#151513"></div>
+</div>
+</div>
+<div style="position: absolute; left: 72px; top: 72px; bottom: 64px; width: 470px; display: flex; flex-direction: column; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0; font-family:'Barlow Semi Condensed',Arial,sans-serif;font-weight:800; font-size: 15px; letter-spacing: 3px; text-transform: uppercase; color: #0047BB">Experiment 07</p>
+<div style="width: 56px; height: 3px; background: #0047BB"></div>
+<h2 style="margin: 0; font-family:'Newsreader',Georgia,serif; font-weight: 300; font-size: 84px; line-height: 0.98; letter-spacing: -0.5px">Wallpaper Studio</h2>
+<p style="margin: 0; font-size: 26px; line-height: 1.3; color: #3D3D3D; max-width: 430px">Turn historic wallpapers and printed cottons into repeating patterns, then try them on a wall.</p>
+</div>
+<img src="assets/nga-logo-black.svg" alt="National Gallery of Art" style="width: 205px; height: auto; display: block">
+</div>
+</div>
+</span></span>
+<span class="soon" hidden>Coming soon</span>
+<span class="cap" aria-hidden="true"><span class="cap-t">Wallpaper Studio</span><span class="cap-d">Turn historic wallpapers and printed cottons into repeating patterns, then try them on a wall.</span></span>
 </a>
 </li>
 </ul>

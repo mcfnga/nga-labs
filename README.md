@@ -1,6 +1,6 @@
 # NGA Labs
 
-Landing page for five experiments, served with GitHub Pages.
+Landing page for the NGA Labs experiments, served with GitHub Pages.
 
 ## Add or change a link
 
@@ -9,7 +9,7 @@ A card with an empty address shows "Coming soon" and is not clickable.
 
 ## Files
 
-- `index.html`: the page, including the five animated title cards
+- `index.html`: the page, including the animated title cards, one per experiment
 - `links.js`: where each card links to
 - `assets/`: NGA logos
 
