@@ -1,0 +1,74 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1200,
+      "h": 675,
+      "title": "01 Handle with Care"
+    },
+    {
+      "file": "ArtWall.dc.html",
+      "x": 1280,
+      "y": 0,
+      "w": 1200,
+      "h": 675,
+      "title": "02 Art Wall"
+    },
+    {
+      "file": "Mosaic.dc.html",
+      "x": 2560,
+      "y": 0,
+      "w": 1200,
+      "h": 675,
+      "title": "03 Mosaic"
+    },
+    {
+      "file": "VisualBrowsing.dc.html",
+      "x": 0,
+      "y": 795,
+      "w": 1200,
+      "h": 675,
+      "title": "04 Visual Browsing"
+    },
+    {
+      "file": "ConservationSimulator.dc.html",
+      "x": 1280,
+      "y": 795,
+      "w": 1200,
+      "h": 675,
+      "title": "05 Conservation Simulator"
+    },
+    {
+      "file": "BorrowedLight.dc.html",
+      "x": 2560,
+      "y": 795,
+      "w": 1200,
+      "h": 675,
+      "title": "06 Borrowed Light"
+    },
+    {
+      "file": "TrueToSize.dc.html",
+      "x": 0,
+      "y": 1590,
+      "w": 1200,
+      "h": 675,
+      "title": "07 True to Size"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "t",
+      "x": 0,
+      "y": -300,
+      "w": 240,
+      "maxW": 3760,
+      "text": "Experiment title cards",
+      "kind": "title1"
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}

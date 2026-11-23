@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Art Wall title card</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Empirica Head Light";src:url(./assets/35ab5e387228024a077bf8093f2e4c90.otf) format("opentype");font-display:swap}
+@font-face{font-family:"Mallory Cmpct Black";src:url(./assets/30c5724168e48fee40c7f1fb0bb078d4.otf) format("opentype");font-display:swap}
+@font-face{font-family:"Mallory Cmpct Light";src:url(./assets/6a84e552090762c970b82f82be612752.otf) format("opentype");font-display:swap}
+body{margin:0}
+a{color:#0047BB}a:hover{color:#003080}
+
+@keyframes up{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+@keyframes down{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+.colU{animation:up 38s linear infinite}
+.colD{animation:down 38s linear infinite}
+
+.still *,.still{animation:none !important}
+@media (prefers-reduced-motion: reduce){.m *,.m{animation:none !important}}
+</style>
+</helmet>
+<div class="card {{stillClass}}" style="width: 1200px; height: 675px; position: relative; overflow: hidden; box-sizing: border-box; background: #151513; color: #FFFFFF; font-family: 'Mallory Cmpct Light', 'Helvetica Neue', Arial, sans-serif">
+<div aria-hidden="true" class="m" style="position: absolute; top: 0; right: 0; width: 640px; height: 675px; overflow: hidden">
+<div style="position:absolute;left:40px;top:-40px;display:flex;gap:14px;transform:rotate(0deg)">
+<div class="colU" style="display:flex;flex-direction:column;gap:14px;width:136px;flex:none">
+<div style="height:210px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:210px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#A88B5E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#A88B5E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:210px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:210px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#A88B5E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#A88B5E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+</div>
+<div class="colD" style="display:flex;flex-direction:column;gap:14px;width:136px;flex:none">
+<div style="height:180px;background:#A88B5E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:210px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#0047BB;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#A88B5E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:210px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#0047BB;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+</div>
+<div class="colU" style="display:flex;flex-direction:column;gap:14px;width:136px;flex:none">
+<div style="height:120px;background:#2B3A55;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#3D3D3D;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#3D3D3D;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#3D3D3D;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#2B3A55;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#3D3D3D;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#4A4640;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#3D3D3D;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#3D3D3D;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+</div>
+<div class="colD" style="display:flex;flex-direction:column;gap:14px;width:136px;flex:none">
+<div style="height:180px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#0047BB;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#5A6B4E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#6B5B45;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#C9B89A;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#0047BB;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:120px;background:#8C3B2E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#5A6B4E;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:240px;background:#6B5B45;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:180px;background:#C9B89A;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+<div style="height:150px;background:#D9E3F5;flex:none;box-shadow:inset 0 0 0 6px rgba(0,0,0,.18)"></div>
+</div>
+</div>
+<div style="position:absolute;inset:0;background:linear-gradient(90deg,#151513 0%,rgba(21,21,19,0) 22%)"></div>
+
+</div>
+<div style="position: absolute; left: 72px; top: 72px; bottom: 64px; width: 470px; display: flex; flex-direction: column; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0; font-family: 'Mallory Cmpct Black', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; letter-spacing: 3px; text-transform: uppercase; color: #FFB600">Experiment 02</p>
+<div style="width: 56px; height: 3px; background: #FFB600"></div>
+<h1 style="margin: 0; font-family: 'Empirica Head Light', Georgia, serif; font-weight: 300; font-size: 84px; line-height: 0.98; letter-spacing: -0.5px">Art Wall</h1>
+<p style="margin: 0; font-size: 26px; line-height: 1.3; color: #C8C9C7; max-width: 430px">Endless columns of paintings from the collection. Touch one to find works that look like it.</p>
+</div>
+<img src="./assets/1ff427146606d65bae92355805f411b6.svg" alt="National Gallery of Art" style="width: 205px; height: auto; display: block">
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"motion":{"editor":"boolean","default":true},"$preview":{"width":1200,"height":675}}'>
+class Component extends DCLogic {
+renderVals() {
+
+return { stillClass: (this.props.motion ?? true) ? '' : 'still' };
+}
+}
+</script>
+</body>
+</html>

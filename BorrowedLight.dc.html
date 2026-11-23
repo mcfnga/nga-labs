@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Borrowed Light title card</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Empirica Head Light";src:url(./assets/35ab5e387228024a077bf8093f2e4c90.otf) format("opentype");font-display:swap}
+@font-face{font-family:"Mallory Cmpct Black";src:url(./assets/30c5724168e48fee40c7f1fb0bb078d4.otf) format("opentype");font-display:swap}
+@font-face{font-family:"Mallory Cmpct Light";src:url(./assets/6a84e552090762c970b82f82be612752.otf) format("opentype");font-display:swap}
+body{margin:0}
+a{color:#0047BB}a:hover{color:#003080}
+
+@keyframes wallc{0%,25%{background:#D9E3F5}33%,58%{background:#0047BB}66%,91%{background:#151513}100%{background:#D9E3F5}}
+@keyframes sofac{0%,25%{background:#0047BB}33%,58%{background:#D9E3F5}66%,91%{background:#80A3DD}100%{background:#0047BB}}
+@keyframes cushc{0%,25%{background:#FFFFFF}33%,58%{background:#151513}66%,91%{background:#FFFFFF}100%{background:#FFFFFF}}
+@keyframes chipc{0%,32%{background:#0047BB}34%,65%{background:#151513}67%,99%{background:#D9E3F5}100%{background:#0047BB}}
+@keyframes fly{0%{transform:translate(0,0) scale(1);opacity:0}12%{opacity:1}68%{transform:translate(196px,150px) scale(1);opacity:1}100%{transform:translate(214px,166px) scale(.5);opacity:0}}
+@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.wall{animation:wallc 12s ease-in-out infinite}
+.sofa{animation:sofac 12s ease-in-out infinite}
+.cush{animation:cushc 12s ease-in-out infinite}
+.fly{animation:fly 4s ease-in-out infinite}
+.chip{animation:chipc 12s linear infinite}
+.hop{animation:hop 2.4s ease-in-out infinite}
+
+.still *,.still{animation:none !important}
+@media (prefers-reduced-motion: reduce){.m *,.m{animation:none !important}}
+</style>
+</helmet>
+<div class="card {{stillClass}}" style="width: 1200px; height: 675px; position: relative; overflow: hidden; box-sizing: border-box; background: #F9F8F5; color: #000000; font-family: 'Mallory Cmpct Light', 'Helvetica Neue', Arial, sans-serif">
+<div aria-hidden="true" class="m" style="position: absolute; top: 0; right: 0; width: 640px; height: 675px; overflow: hidden">
+<div style="position:absolute;left:56px;top:84px;width:170px;height:210px;border:14px solid #151513;box-sizing:content-box;background:#D9E3F5;overflow:hidden">
+<div style="position:absolute;right:28px;top:30px;width:52px;height:52px;border-radius:50%;background:#FFFFFF"></div>
+<div style="position:absolute;left:0;right:0;bottom:36%;height:14%;background:#80A3DD"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:36%;background:#0047BB"></div>
+</div>
+<div style="position:absolute;left:56px;top:356px;display:flex;gap:10px">
+<div class="hop" style="width:30px;height:30px;background:#D9E3F5;box-shadow:0 0 0 3px #151513"></div>
+<div class="hop" style="width:30px;height:30px;background:#80A3DD;box-shadow:0 0 0 3px #151513;animation-delay:.2s"></div>
+<div class="hop" style="width:30px;height:30px;background:#0047BB;box-shadow:0 0 0 3px #151513;animation-delay:.4s"></div>
+<div class="hop" style="width:30px;height:30px;background:#FFFFFF;box-shadow:0 0 0 3px #151513;animation-delay:.6s"></div>
+<div class="hop" style="width:30px;height:30px;background:#151513;box-shadow:0 0 0 3px #151513;animation-delay:.8s"></div>
+</div>
+<div style="position:absolute;left:276px;top:250px;width:300px;height:340px;border:6px solid #151513;box-sizing:content-box;overflow:hidden">
+<div class="wall" style="position:absolute;inset:0;background:#D9E3F5"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:74px;background:#FFFFFF;border-top:6px solid #151513"></div>
+<div style="position:absolute;left:170px;top:48px;width:64px;height:78px;background:#FFFFFF;border:6px solid #151513;box-sizing:border-box">
+<div style="position:absolute;left:14px;top:14px;width:22px;height:22px;border-radius:50%;background:#0047BB"></div>
+</div>
+<div class="sofa" style="position:absolute;left:40px;bottom:44px;width:220px;height:92px;background:#0047BB;box-shadow:0 0 0 5px #151513"></div>
+<div class="sofa" style="position:absolute;left:22px;bottom:44px;width:30px;height:64px;background:#0047BB;box-shadow:0 0 0 5px #151513"></div>
+<div class="sofa" style="position:absolute;left:248px;bottom:44px;width:30px;height:64px;background:#0047BB;box-shadow:0 0 0 5px #151513"></div>
+<div class="cush" style="position:absolute;left:70px;bottom:76px;width:54px;height:46px;background:#FFFFFF;box-shadow:0 0 0 4px #151513"></div>
+</div>
+<div class="fly" style="position:absolute;left:250px;top:180px;width:34px;height:34px">
+<div class="chip" style="width:34px;height:34px;background:#0047BB;box-shadow:0 0 0 3px #151513"></div>
+</div>
+</div>
+<div style="position: absolute; left: 72px; top: 72px; bottom: 64px; width: 470px; display: flex; flex-direction: column; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0; font-family: 'Mallory Cmpct Black', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; letter-spacing: 3px; text-transform: uppercase; color: #0047BB">Experiment 06</p>
+<div style="width: 56px; height: 3px; background: #0047BB"></div>
+<h1 style="margin: 0; font-family: 'Empirica Head Light', Georgia, serif; font-weight: 300; font-size: 84px; line-height: 0.98; letter-spacing: -0.5px">Borrowed Light</h1>
+<p style="margin: 0; font-size: 26px; line-height: 1.3; color: #3D3D3D; max-width: 430px">Borrow a painting's colors, composition and subject to decorate a room.</p>
+</div>
+<img src="./assets/5bc76c37474120d6f86a23ac9f8796a2.svg" alt="National Gallery of Art" style="width: 205px; height: auto; display: block">
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"motion":{"editor":"boolean","default":true},"$preview":{"width":1200,"height":675}}'>
+class Component extends DCLogic {
+renderVals() {
+return { stillClass: (this.props.motion ?? true) ? '' : 'still' };
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Conservation Simulator title card</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:"Empirica Head Light";src:url(./assets/35ab5e387228024a077bf8093f2e4c90.otf) format("opentype");font-display:swap}
+@font-face{font-family:"Mallory Cmpct Black";src:url(./assets/30c5724168e48fee40c7f1fb0bb078d4.otf) format("opentype");font-display:swap}
+@font-face{font-family:"Mallory Cmpct Light";src:url(./assets/6a84e552090762c970b82f82be612752.otf) format("opentype");font-display:swap}
+body{margin:0}
+a{color:#0047BB}a:hover{color:#003080}
+
+@keyframes reveal{0%,8%{clip-path:inset(0 0 0 0)}55%,80%{clip-path:inset(0 0 0 100%)}100%{clip-path:inset(0 0 0 0)}}
+@keyframes swab{0%,8%{transform:translate(0,0) rotate(-18deg)}12%{transform:translate(10px,-30px) rotate(-14deg)}20%{transform:translate(70px,30px) rotate(-22deg)}28%{transform:translate(130px,-25px) rotate(-14deg)}36%{transform:translate(190px,28px) rotate(-22deg)}44%{transform:translate(250px,-22px) rotate(-14deg)}55%{transform:translate(310px,10px) rotate(-18deg)}80%{transform:translate(340px,180px) rotate(-30deg)}100%{transform:translate(0,0) rotate(-18deg)}}
+@keyframes tap{0%,60%,100%{transform:rotate(0)}66%{transform:rotate(-28deg)}72%{transform:rotate(4deg)}78%{transform:rotate(-20deg)}84%{transform:rotate(0)}}
+.grime{animation:reveal 9s ease-in-out infinite}
+.swab{animation:swab 9s ease-in-out infinite;transform-origin:50% 100%}
+.hammer{animation:tap 6s ease-in-out infinite;transform-origin:20% 90%}
+
+.still *,.still{animation:none !important}
+@media (prefers-reduced-motion: reduce){.m *,.m{animation:none !important}}
+</style>
+</helmet>
+<div class="card {{stillClass}}" style="width: 1200px; height: 675px; position: relative; overflow: hidden; box-sizing: border-box; background: #FFFFFF; color: #000000; font-family: 'Mallory Cmpct Light', 'Helvetica Neue', Arial, sans-serif">
+<div aria-hidden="true" class="m" style="position: absolute; top: 0; right: 0; width: 640px; height: 675px; overflow: hidden">
+<div style="position:absolute;left:90px;top:120px;width:420px;height:320px;border:16px solid #151513;box-sizing:content-box;background:#151513">
+<div style="position:absolute;inset:0;overflow:hidden"><div style="position:absolute;inset:0;background:#D9E3F5"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:38%;background:#0047BB"></div>
+
+<div style="position:absolute;right:70px;top:46px;width:70px;height:70px;border-radius:50%;background:#FFFFFF"></div>
+<div style="position:absolute;left:0;right:0;bottom:38%;height:14%;background:#80A3DD"></div></div>
+<div class="grime" style="position:absolute;inset:0;background:#151513;opacity:.78">
+<div style="position:absolute;left:40px;top:60px;width:90px;height:40px;border-radius:50%;background:#000000"></div>
+<div style="position:absolute;right:60px;bottom:80px;width:130px;height:50px;border-radius:50%;background:#000000"></div>
+<div style="position:absolute;left:180px;top:150px;width:60px;height:26px;border-radius:50%;background:#000000"></div>
+</div>
+</div>
+<div class="swab" style="position:absolute;left:110px;top:200px;width:20px;height:190px">
+<div style="position:absolute;left:0;top:0;width:20px;height:32px;border-radius:10px;background:#FFFFFF;box-shadow:0 0 0 3px #151513"></div>
+<div style="position:absolute;left:8px;top:32px;width:4px;height:158px;background:#151513"></div>
+</div>
+<div style="position:absolute;left:430px;top:500px;width:180px;height:120px">
+<div class="hammer" style="position:absolute;left:40px;top:-24px;width:126px;height:142px;transform-origin:72% 88%">
+<svg aria-hidden="true" width="126" height="142" viewBox="-20 -16 150 170" style="display:block;overflow:visible"><g transform="rotate(-30 64 70)"><rect x="59" y="24" width="10" height="50" fill="#FFFFFF" stroke="#151513" stroke-width="3"></rect><rect x="56" y="70" width="16" height="64" rx="5" fill="#0047BB" stroke="#151513" stroke-width="3"></rect><path d="M80 8H52Q18 8 2 56Q24 30 52 26H80Z" fill="#151513"></path><rect x="78" y="3" width="20" height="28" rx="2" fill="#151513"></rect></g></svg>
+</div>
+<div style="position:absolute;left:-150px;top:90px;padding:5px 12px;border:3px solid #0047BB;background:#FFFFFF;color:#0047BB;font-family:'Mallory Cmpct Black',Arial,sans-serif;font-size:15px;letter-spacing:3px;transform:rotate(-6deg)">JUST… NO</div>
+</div>
+
+</div>
+<div style="position: absolute; left: 72px; top: 72px; bottom: 64px; width: 470px; display: flex; flex-direction: column; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0; font-family: 'Mallory Cmpct Black', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; letter-spacing: 3px; text-transform: uppercase; color: #0047BB">Experiment 05</p>
+<div style="width: 56px; height: 3px; background: #0047BB"></div>
+<h1 style="margin: 0; font-family: 'Empirica Head Light', Georgia, serif; font-weight: 300; font-size: 84px; line-height: 0.98; letter-spacing: -0.5px">Conservation Simulator</h1>
+<p style="margin: 0; font-size: 26px; line-height: 1.3; color: #3D3D3D; max-width: 430px">Patch &amp; Pray: restore the painting. Please ignore the tiny hammer.</p>
+</div>
+<img src="./assets/5bc76c37474120d6f86a23ac9f8796a2.svg" alt="National Gallery of Art" style="width: 205px; height: auto; display: block">
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"motion":{"editor":"boolean","default":true},"$preview":{"width":1200,"height":675}}'>
+class Component extends DCLogic {
+renderVals() {
+
+return { stillClass: (this.props.motion ?? true) ? '' : 'still' };
+}
+}
+</script>
+</body>
+</html>

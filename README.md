@@ -1,17 +1,36 @@
-# NGA Labs
+# Experiment title cards — entire project
 
-Landing page for the NGA Labs experiments, served with GitHub Pages.
+This project’s pages, files, and uploads as this browser tab had them at export.
+Anything left out is listed below.
 
-## Add or change a link
+## Contents
 
-Open `links.js`, paste the live address between the quotes for that experiment, and commit.
-A card with an empty address shows "Coming soon" and is not clickable.
+- `ArtWall.dc.html`
+- `BorrowedLight.dc.html`
+- `ConservationSimulator.dc.html`
+- `Main.dc.html`
+- `Mosaic.dc.html`
+- `TrueToSize.dc.html`
+- `VisualBrowsing.dc.html`
+- `canvas.json` — the canvas: its pages, where each artboard sits, its notes and shapes
+- `assets/` — files uploaded to the design (images, fonts, media)
+- `_runtime/` — what runs the pages in a browser; not part of the design
 
-## Files
+## Uploaded files
 
-- `index.html`: the page, including the animated title cards, one per experiment
-- `links.js`: where each card links to
-- `assets/`: NGA logos
+Images, fonts and media uploaded to the design are written once each under
+`assets/` — 5 in this export — and the exported files refer to them there. A
+reference a script puts together while the page runs (for example
+`"/_blob/" + id`) is not rewritten and does not load from this folder.
 
-Fonts are open-licence Google Fonts (Newsreader and Barlow Semi Condensed) standing in for the NGA brand fonts.
-Visitors who have "reduce motion" turned on see still cards; everyone else can use the Pause motion button.
+A page in a subfolder may not show an upload that reaches it through a script, a data
+file or an imported component, because those files link to `assets/` from a different folder.
+
+## Viewing
+
+To view a page, start a local web server in this folder (for example `python3 -m http.server`), then open an artboard’s `.dc.html` file through it. Opening the file directly may not work, because some browsers block its scripts.
+
+## Left out of this export
+
+The export never includes hidden files (files whose names start with a dot) or
+files the editor keeps for its own use.
