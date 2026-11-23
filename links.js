@@ -7,6 +7,6 @@ window.EXPERIMENT_LINKS = {
   "visual-browsing": "https://nga-visual-browsing.netlify.app/",
   "conservation-simulator": "https://artrescue.netlify.app/",
   "borrowed-light": "https://nga-borrowed-light.netlify.app/",
-  "wallpaper-studio": "https://wallpaper-studio-theta.vercel.app//"
-  "true-to-size": "https://true-size-eight.vercel.app//"
+  "wallpaper-studio": "https://wallpaper-studio-theta.vercel.app/",
+  "true-to-size": "https://true-size-eight.vercel.app/"
 };
